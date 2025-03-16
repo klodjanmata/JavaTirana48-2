@@ -1,10 +1,7 @@
 package Hibernate;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "movies")
@@ -22,4 +19,17 @@ public class Movie {
     private String genre;
     @Column(name = "yearOfRelease")
     private int year;
+    @Column(name =  "rating")
+    private int rating;
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", year=" + year +
+                ", rating=" + rating +
+                '}';
+    }
 }

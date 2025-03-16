@@ -14,12 +14,12 @@ public class Main {
         movies.add(m3);
         movies.add(m4);
         MovieDAO movieDAO = new MovieDAO();
-//        movieDAO.createTable();
+        movieDAO.createTable();
         //movieDAO.deleteTable();
-//        movieDAO.create(m);
-//        for (Movie movie : movies) {
-//            movieDAO.create(movie);
-//        }
+        movieDAO.create(m);
+        for (Movie movie : movies) {
+            movieDAO.create(movie);
+        }
 //        m2.setGenre("Drama");
 //        movieDAO.update(m2);
 //        movieDAO.delete(m2.getId());
