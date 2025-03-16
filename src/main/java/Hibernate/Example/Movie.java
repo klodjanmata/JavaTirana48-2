@@ -1,4 +1,4 @@
-package Hibernate;
+package Hibernate.Example;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package Hibernate;
+package Hibernate.Example;
 
 import java.time.LocalDate;
 import java.util.List;

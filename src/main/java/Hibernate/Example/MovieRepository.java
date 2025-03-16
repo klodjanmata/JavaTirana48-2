@@ -1,4 +1,4 @@
-package Hibernate;
+package Hibernate.Example;
 
 import Hibernate.util.HibernateUtil;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -9,51 +9,53 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AuthorRepository {
+public class MovieRepository {
 
-    public void save(Author author) {
+    public void save(Movie movie) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Transaction transaction = session.beginTransaction();
-            session.merge(author);
+            session.persist(movie);
             transaction.commit();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void delete(Author author) {
+    public void delete(Movie movie) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Transaction transaction = session.beginTransaction();
-            session.remove(author);
+            session.remove(movie);
             transaction.commit();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-//    public void update(Author author) {
-//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-//            Transaction transaction = session.beginTransaction();
-//            session.merge(author);
-//            transaction.commit();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-
-    public Author getById(int id) {
+    public void update(Movie movie) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return session.find(Author.class, id);
+            Transaction transaction = session.beginTransaction();
+            session.merge(movie);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
-    public List<Author> findAll() {
+    public Movie getMovieById(int id) {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return session.find(Movie.class, id);
+        }
+    }
+
+    public List<Movie> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            //return session.createQuery("from Movie").list();
             CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaQuery<Author> cq = cb.createQuery(Author.class);
-            Root<Author> root = cq.from(Author.class);
-            cq.select(root);
+            CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+            Root<Movie> root = cq.from(Movie.class);
+            cq.select(root); // <- correct way
             return session.createQuery(cq).getResultList();
         }
     }
+
 }
